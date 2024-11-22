@@ -1,0 +1,32 @@
+name: Maven CI with JUnit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clona il repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Configura Java
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+
+      # Compila il progetto con Maven
+      - name: Build with Maven
+        run: mvn clean compile
+
+      # Esegui i test con Maven
+      - name: Test with Maven
+        run: mvn test
